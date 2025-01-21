@@ -33,7 +33,7 @@ class UserController extends Controller
      * @param UserCreateRequest $request
      * @return UserResource
      */
-    public function create(UserCreateRequest $request) : UserResource {
+    public function store(UserCreateRequest $request) : UserResource {
         try {
             $data = $request->validated();
 
@@ -80,7 +80,7 @@ class UserController extends Controller
      * @param $user_id
      * @return JsonResponse
      */
-    public function delete(int $user_id) : JsonResponse {
+    public function destroy(int $user_id) : JsonResponse {
         $user = $this->userRepository->delete($user_id);
         return response()->json(['message' => 'User deleted successfully!']);
     }
