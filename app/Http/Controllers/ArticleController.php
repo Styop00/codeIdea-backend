@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\ArticleResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ArticleController extends Controller
 {
@@ -21,9 +22,9 @@ class ArticleController extends Controller
     public function __construct(protected ArticleRepositoryInterface $articleRepository ) {}
 
     /**
-     * @return Object
+     * @return AnonymousResourceCollection
      */
-    public function index() : Object {
+    public function index() : AnonymousResourceCollection {
         $articles = $this->articleRepository->all();
         return ArticleResource::collection($articles);
     }
