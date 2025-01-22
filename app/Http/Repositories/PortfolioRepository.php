@@ -21,7 +21,7 @@ class PortfolioRepository implements \App\Http\Contracts\PortfolioRepositoryInte
      * @param int $id
      * @return Portfolio|null
      */
-    public function find(int $id): Portfolio|null
+    public function find(int $id): Portfolio
     {
         return Portfolio::query()->where('id', $id)->first();
 
@@ -31,9 +31,9 @@ class PortfolioRepository implements \App\Http\Contracts\PortfolioRepositoryInte
      * @param array $data
      * @return Portfolio
      */
-    public function create(array $data): ?Portfolio
+    public function create(array $data): Portfolio
     {
-        try {
+
             return Portfolio::query()->create([
                 'title' => $data["title"],
                 'about' => $data["about"],
@@ -42,9 +42,7 @@ class PortfolioRepository implements \App\Http\Contracts\PortfolioRepositoryInte
 
             ]);
 
-        } catch (\Exception $e) {
-            return null;
-        }
+
     }
 
     /**

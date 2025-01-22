@@ -71,10 +71,9 @@ class PortfolioController extends Controller
      * @param int $portfolio_id
      * @return Portfolio
      */
-    public function show(int $portfolio_id): PortfolioResource
+    public function show(Portfolio $portfolio): PortfolioResource
    {
-       $portfolio=$this->portfolioRepository->find($portfolio_id);
-        return new PortfolioResource($portfolio);
+    return new PortfolioResource($portfolio);
    }
 
     /**

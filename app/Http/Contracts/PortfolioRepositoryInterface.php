@@ -10,7 +10,7 @@ interface PortfolioRepositoryInterface {
 
     public function find(int $id) : Portfolio | null;
 
-    public function create(array $data) : ?Portfolio;
+    public function create(array $data) : Portfolio;
 
     public function update(array $data, int $id) : bool;
 
