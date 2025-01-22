@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Contracts\PortfolioRepositoryInterface;
+use App\Http\Repositories\PortfolioRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,9 +18,13 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(
-            \App\Http\Contracts\ArticleRepositoryInterface::class, 
+            \App\Http\Contracts\ArticleRepositoryInterface::class,
             \App\Http\Repositories\ArticleRepository::class,
-        );        
+        );
+        $this->app->singleton(
+            PortfolioRepositoryInterface::class,
+            PortfolioRepository::class,
+        );
     }
 
     /**
