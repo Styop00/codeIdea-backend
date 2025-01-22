@@ -8,10 +8,6 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public $singletons = [
-        App\Http\Contracts\ArticleRepositoryInterface::class,
-        App\Http\Repositories\ArticleRepository::class
-    ];
     /**
      * Register any application services.
      */
@@ -21,9 +17,15 @@ class AppServiceProvider extends ServiceProvider
             \App\Http\Contracts\ArticleRepositoryInterface::class,
             \App\Http\Repositories\ArticleRepository::class,
         );
+
         $this->app->singleton(
             PortfolioRepositoryInterface::class,
             PortfolioRepository::class,
+        );
+
+        $this->app->singleton(
+            \App\Http\Contracts\UserRepositoryInterface::class,
+            \App\Http\Repositories\UserRepository::class,
         );
     }
 

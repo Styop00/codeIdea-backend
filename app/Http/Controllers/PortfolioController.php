@@ -35,7 +35,7 @@ class PortfolioController extends Controller
      * @param PortfolioCreateRequest $request
      * @return Portfolio
      */
-    public function create(PortfolioCreateRequest $request ): PortfolioResource
+    public function store(PortfolioCreateRequest $request ): PortfolioResource
     {
 
         $imagePath=null;
@@ -71,7 +71,7 @@ class PortfolioController extends Controller
      * @param int $portfolio_id
      * @return Portfolio
      */
-    public function find(int $portfolio_id): PortfolioResource
+    public function show(int $portfolio_id): PortfolioResource
    {
        $portfolio=$this->portfolioRepository->find($portfolio_id);
         return new PortfolioResource($portfolio);
@@ -81,7 +81,7 @@ class PortfolioController extends Controller
      * @param int $portfolio_id
      * @return bool
      */
-    public function delete(int $portfolio_id):JsonResponse{
+    public function destroy(int $portfolio_id):JsonResponse{
          $this->portfolioRepository->delete($portfolio_id);
          return response()->json(['message' => 'Portfolio deleted successfully!']);
 
