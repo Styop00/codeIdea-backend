@@ -24,7 +24,8 @@ class ArticleRepository implements ArticleRepositoryInterface {
      * @return Collection 
      */
     public function all() : Collection {
-        return $this->article->all();
+        // return $this->article->all();
+        return $this->article->take(9)->get();
     }
 
     /**
