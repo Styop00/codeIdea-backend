@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ArticleCreateRequest extends FormRequest
+class UserCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,29 +24,35 @@ class ArticleCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:50',
-            'body' => 'required|string',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'max:255',
+            'picture' => 'required|string',
+            'position' => 'required|string',
+            'description' => '',
         ];
     }
 
     /**
      * @return array
      */
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
-            'title.required' => 'The article must have a title',
-            'title.max' => 'The article title must contain a maximum of 50 characters',
-            'body.required' => 'The article must have a body',
+            'firstname.required' => 'A firstname is required',
+            'firstname.max' => 'A firstname must be max. :max characters',
+            'lastname.max' => 'A lastname must be max. :max characters',
+            'picture.required' => 'A picture is required',
+            'position.required' => 'A position is required',
         ];
     }
 
     /**
      * @param Validator $validator
-     * @return string
      */
-    public function failedValidation(Validator $validator) : string {
+    public function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(response()->json([
-            'message' => $validator->messages()->first(),
+            'message' => $validator->messages(),
         ]));
     }
 }

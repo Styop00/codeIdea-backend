@@ -33,7 +33,7 @@ class ArticleController extends Controller
      * @param ArticleCreateRequest $request
      * @return ArticleResource
      */
-    public function create(ArticleCreateRequest $request) : ArticleResource {
+    public function store(ArticleCreateRequest $request) : ArticleResource {
         try {
             $data = $request->validated();
 
@@ -74,7 +74,7 @@ class ArticleController extends Controller
      * @param $article_id
      * @return JsonResponse
      */
-    public function delete(int $article_id) : JsonResponse {
+    public function destroy(int $article_id) : JsonResponse {
         $article = $this->articleRepository->delete($article_id);
         return response()->json(['message' => 'Article deleted successfully!']);
     }
