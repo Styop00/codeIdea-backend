@@ -1,6 +1,6 @@
 <?php
 
-use App\Mail\ContactCompanyMail;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ArticleController;
@@ -11,5 +11,5 @@ Route::resources([
     'articles' => ArticleController::class,
     'users' => UserController::class,
     'portfolio' => PortfolioController::class,
-    'mail'=>ContactCompanyMail::class,
 ]);
+Route::post("/mail",ContactController::class);

@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ContactCompanyMail extends Mailable
+class ContactCompanyMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -19,17 +19,17 @@ class ContactCompanyMail extends Mailable
     public $name;
     public $phone;
     public $email;
-    public $message;
+    public $body;
 
     /**
      *
      */
-    public function __construct($name, $email, $phone, $message)
+    public function __construct($name, $email, $phone, $body)
     {
         $this->name = $name;
         $this->email = $email;
         $this->phone = $phone;
-        $this->message = $message;
+        $this->body = $body;
     }
 
     /**
@@ -39,6 +39,7 @@ class ContactCompanyMail extends Mailable
     {
         return new Envelope(
             subject: 'Contact Company Mail',
+
         );
     }
 
@@ -48,7 +49,13 @@ class ContactCompanyMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'CompanyContactMail',
+            view: 'contact-us',
+            with: [
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+                'body' => $this->body
+            ]
         );
     }
 
