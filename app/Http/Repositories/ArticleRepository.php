@@ -4,7 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Http\Contracts\ArticleRepositoryInterface;
 use App\Models\Article;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArticleRepository implements ArticleRepositoryInterface {
     /**
@@ -21,10 +21,10 @@ class ArticleRepository implements ArticleRepositoryInterface {
     }
 
     /**
-     * @return Collection 
+     * @return LengthAwarePaginator
      */
-    public function all() : Collection {
-        return $this->article->all();
+    public function all(int $page) : LengthAwarePaginator  {
+        return $this->article->paginate(10);
     }
 
     /**

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Contracts\ArticleRepositoryInterface;
 use App\Http\Requests\ArticleCreateRequest;
 use App\Http\Requests\ArticleUpdateRequest;
+use App\Http\Requests\PaginationRequest;
 use App\Models\Article;
 
 use Illuminate\Http\JsonResponse;
@@ -22,11 +23,12 @@ class ArticleController extends Controller
     public function __construct(protected ArticleRepositoryInterface $articleRepository ) {}
 
     /**
-     * @return AnonymousResourceCollection
+     * @return JsonResponse
      */
-    public function index() : AnonymousResourceCollection {
-        $articles = $this->articleRepository->all();
-        return ArticleResource::collection($articles);
+    public function index(PaginationRequest $request) : JsonResponse {
+        $page = $request->validated();
+        $articles = $this->articleRepository->all($page['page']);
+        return response()->json($articles);
     }
 
     /**
