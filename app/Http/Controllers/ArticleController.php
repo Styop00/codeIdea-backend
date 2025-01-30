@@ -32,6 +32,24 @@ class ArticleController extends Controller
     }
 
     /**
+     * @return JsonResponse
+     */
+    public function show($article_id) : JsonResponse {
+        $article = $this->articleRepository->find($article_id);
+
+        return response()->json($article);
+    }
+
+    /**
+     * @param $current_article_id
+     * @return JsonResponse
+     */
+    public function get_random_articles($current_article_id) : JsonResponse {
+        $articles = $this->articleRepository->get_random_articles($current_article_id);
+        return response()->json($articles);
+    }
+
+    /**
      * @param ArticleCreateRequest $request
      * @return ArticleResource
      */

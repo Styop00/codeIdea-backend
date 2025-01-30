@@ -8,3 +8,5 @@ Route::resources([
     'articles' => ArticleController::class,
     'users' => UserController::class,
 ]);
+
+Route::get('random/{id}', [ArticleController::class, 'get_random_articles']);

@@ -21,6 +21,14 @@ class ArticleRepository implements ArticleRepositoryInterface {
     }
 
     /**
+     * @param int $id
+     * @return Article | null
+     */
+    public function get_random_articles(int $id) {
+        return $this->article->where('id', '!=', $id)->inRandomOrder()->limit(3)->get();
+    }
+
+    /**
      * @return LengthAwarePaginator
      */
     public function all(int $page) : LengthAwarePaginator  {
