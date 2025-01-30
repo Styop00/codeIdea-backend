@@ -13,3 +13,5 @@ Route::resources([
     'portfolio' => PortfolioController::class,
 ]);
 Route::post("/mail",ContactController::class);
+Route::get('random/{id}', [ArticleController::class, 'getRandomArticles']);
+

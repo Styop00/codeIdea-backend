@@ -23,11 +23,31 @@ class ArticleController extends Controller
     public function __construct(protected ArticleRepositoryInterface $articleRepository ) {}
 
     /**
+     * @param PaginationRequest $request
      * @return JsonResponse
      */
     public function index(PaginationRequest $request) : JsonResponse {
         $page = $request->validated();
         $articles = $this->articleRepository->all($page['page']);
+        return response()->json($articles);
+    }
+
+    /**
+     * @param int $articleId
+     * @return JsonResponse
+     */
+    public function show(int $articleId) : JsonResponse {
+        $article = $this->articleRepository->find($articleId);
+
+        return response()->json($article);
+    }
+
+    /**
+     * @param int $currentArticleId
+     * @return JsonResponse
+     */
+    public function getRandomArticles(int $currentArticleId) : JsonResponse {
+        $articles = $this->articleRepository->getRandomArticles($currentArticleId);
         return response()->json($articles);
     }
 
@@ -57,27 +77,27 @@ class ArticleController extends Controller
 
     /**
      * @param ArticleUpdateRequest $request
-     * @param int $article_id
+     * @param int $articleId
      * @return ArticleResource
      */
-    public function update(ArticleUpdateRequest $request, int $article_id) : ArticleResource {
+    public function update(ArticleUpdateRequest $request, int $articleId) : ArticleResource {
         $data = $request->validated();
-        $article = $this->articleRepository->find($article_id);
+        $article = $this->articleRepository->find($articleId);
 
         $this->articleRepository->update([
             'title' => $data['title'] ?? $article->title,
             'body' => $data['body'] ?? $article->body,
-        ], $article_id);
+        ], $articleId);
 
-        return new ArticleResource($this->articleRepository->find($article_id));
+        return new ArticleResource($this->articleRepository->find($articleId));
     }
 
     /**
-     * @param $article_id
+     * @param $articleId
      * @return JsonResponse
      */
-    public function destroy(int $article_id) : JsonResponse {
-        $article = $this->articleRepository->delete($article_id);
+    public function destroy(int $articleId) : JsonResponse {
+        $article = $this->articleRepository->delete($articleId);
         return response()->json(['message' => 'Article deleted successfully!']);
     }
 }
