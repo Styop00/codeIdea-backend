@@ -17,31 +17,7 @@ class ArticleSeeder extends Seeder
             [
                 'title' => 'Breaking the Mold: How AI is Redefining Excellence',
                 'description' => 'Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving...',
-                'body' => '<p>Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving. </p> <img src="config(\'app.url\'):8000/storage/aa.png">',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-
-            [
-                'title' => 'Breaking the Mold: How AI is Redefining Excellence',
-                'description' => 'Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving...',
-                'body' => '<p>Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving. </p> <img src="config(\'app.url\'):8000/storage/aa.png">',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-
-            [
-                'title' => 'Breaking the Mold: How AI is Redefining Excellence',
-                'description' => 'Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving...',
-                'body' => '<p>Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving. </p> <img src="config(\'app.url\'):8000/storage/aa.png">',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-
-            [
-                'title' => 'Breaking the Mold: How AI is Redefining Excellence',
-                'description' => 'Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving...',
-                'body' => '<p>Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving. </p> <img src="config(\'app.url\'):8000/storage/aa.png">',
+                'body' => '<p class="mb-5">Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving. </p> <img src="' . config('app.url') . '":8000/storage/aa.png">',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
