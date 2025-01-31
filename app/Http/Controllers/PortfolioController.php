@@ -7,19 +7,19 @@ use App\Http\Requests\PortfolioCreateRequest;
 use App\Http\Requests\PortfolioUpdateRequest;
 use App\Http\Resources\PortfolioResource;
 use App\Models\Portfolio;
-use App\Services\ImageService;
+use App\Services\FileService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class PortfolioController extends Controller
 {
 
-    protected $imageService;
+    protected $fileService;
     /**
      * @param PortfolioRepositoryInterface $portfolioRepository
      */
-    public function __construct(protected PortfolioRepositoryInterface $portfolioRepository,ImageService $imageService){
-        $this->imageService = $imageService;
+    public function __construct(protected PortfolioRepositoryInterface $portfolioRepository, FileService $fileService){
+        $this->fileService = $fileService;
     }
 
     /**
@@ -41,7 +41,7 @@ class PortfolioController extends Controller
         $imagePath=null;
         $img = $request->file('img');
         if($img){
-            $imagePath=$this->imageService->storeImage($img);
+            $imagePath=$this->fileService->storeFile($img);
         }
         $portfolioData=$request->validated();
         $portfolioData['img_url']=$imagePath;
@@ -59,7 +59,7 @@ class PortfolioController extends Controller
         $imagePath=null;
         $img=$request->file('img');
         if($img){
-            $imagePath=$this->imageService->storeImage($img);
+            $imagePath=$this->fileService->storeFile($img);
         }
         $portfolioData=$request->validated();
         $portfolioData["img_url"]=$imagePath;
