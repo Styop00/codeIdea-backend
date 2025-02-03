@@ -24,17 +24,18 @@ class ApplicantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "fullname"=>"required|string|min:3",
-            "phone_number"=>"required|string|min:5",
-            'email'=>"required|email|min:5",
-            "applied_position"=>"required|string",
-            "applied_date"=>"date",
-            "about_applicant"=>'string',
-            "cv_applicant"=>"required|file|mimes:pdf|max:2048",
-            "additional_file"=>'array',
-            "additional_file.*"=>'file|max:2048'
+            "fullname" => "required|string|min:3",
+            "phone_number" => "required|string|min:5",
+            'email' => "required|email|min:5",
+            "applied_position" => "required|string",
+            "applied_date" => "date",
+            "about_applicant" => 'string',
+            "cv_applicant" => "required|file|mimes:pdf|max:2048",
+            "additional_file" => 'array',
+            "additional_file.*" => 'file|max:2048'
         ];
     }
+
     public function messages(): array
     {
         return [
@@ -62,6 +63,7 @@ class ApplicantRequest extends FormRequest
             "additional_file.*.max" => "Each file must not exceed 2MB.",
         ];
     }
+
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

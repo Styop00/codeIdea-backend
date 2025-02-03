@@ -40,8 +40,17 @@ class JobController extends Controller
         }
         $data=$req->validated();
         $data["cv_applicant"]=$cv_path;
-        $data["additional_file"]=$filesPath;
-        $this->applicantRepository->create($data,$id);
+        $applicant=$this->applicantRepository->create($data,$id);
+        $filesApplicants=[];
+        if(isset($data["additional_file"]) && count($data['additional_file']) > 0){
+            foreach ($data['additional_file'] as $file) {
+                $filesApplicants[] = [
+                    'file_url' => $file,
+                ];
+            }
+            $applicant->files()->createMany($filesApplicants);
+        }
+
         return response()->json([
             "message"=>"ok"
         ]);

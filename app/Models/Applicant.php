@@ -21,7 +21,7 @@ class Applicant extends Model
     /**
      * @return HasMany
      */
-    public function file(): HasMany
+    public function files(): HasMany
     {
         return $this->hasMany(File::class);
     }

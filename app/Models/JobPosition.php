@@ -26,7 +26,7 @@ class JobPosition extends Model
     /**
      * @return HasMany
      */
-    public function applicant():HasMany{
+    public function applicants():HasMany{
         return $this->hasMany(Applicant::class);
     }
 }

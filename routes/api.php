@@ -16,3 +16,5 @@ Route::resources([
 ]);
 Route::post("/mail", ContactController::class);
 Route::post('jobs/apply/{id}',[JobController::class,"apply"]);
+Route::get('random/{id}', [ArticleController::class, 'getRandomArticles']);
+

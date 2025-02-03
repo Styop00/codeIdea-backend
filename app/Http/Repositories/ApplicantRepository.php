@@ -21,7 +21,6 @@ class ApplicantRepository implements \App\Http\Contracts\ApplicantRepositoryInte
             "about_applicant"=>$data["about_applicant"],
             "cv_url"=>$data['cv_applicant']
         ]);
-        $applicant->files()->createMany($data["additional_file"]);
 
     }
 }
