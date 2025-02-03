@@ -24,13 +24,13 @@ class ApplicantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "fullname"          => "required|string|min:3",
-            "phone_number"      => "required|string|min:5",
-            'email'             => "required|email|min:5",
-            "applied_position"  => "required|string",
-            "applied_date"      => "date",
-            "about_applicant"   => 'string',
-            "cv_applicant"      => "required|file|mimes:pdf|max:2048",
+            "fullname"           => "required|string|min:3",
+            "phone_number"       => "required|string|min:5",
+            'email'              => "required|email|min:5",
+            "applied_position"   => "required|string",
+            "applied_date"       => "date",
+            "about_applicant"    => 'string',
+            "cv_applicant"       => "required|file|mimes:pdf|max:2048",
             "additional_files"   => 'array',
             "additional_files.*" => 'file|max:2048'
         ];
@@ -57,10 +57,10 @@ class ApplicantRequest extends FormRequest
             "cv_applicant.file"         => "CV must be a valid file.",
             "cv_applicant.mimes"        => "CV must be a PDF file.",
             "cv_applicant.max"          => "CV size must not exceed 2MB.",
-            "additional_files.array"     => "Additional files must be an array.",
-            "additional_files.*.file"    => "Each file must be a valid file.",
-            "additional_files.*.mimes"   => "Accepted file formats: PDF, JPG, PNG.",
-            "additional_files.*.max"     => "Each file must not exceed 2MB.",
+            "additional_files.array"    => "Additional files must be an array.",
+            "additional_files.*.file"   => "Each file must be a valid file.",
+            "additional_files.*.mimes"  => "Accepted file formats: PDF, JPG, PNG.",
+            "additional_files.*.max"    => "Each file must not exceed 2MB.",
         ];
     }
 

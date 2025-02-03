@@ -6,7 +6,6 @@ use App\Http\Contracts\ApplicantRepositoryInterface;
 use App\Http\Contracts\JobPositionRepositoryInterface;
 use App\Http\Requests\ApplicantRequest;
 use App\Http\Resources\JobPositionResource;
-use App\Models\JobPosition;
 use App\Services\FileService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
