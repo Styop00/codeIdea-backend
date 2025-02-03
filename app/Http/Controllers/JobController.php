@@ -21,7 +21,6 @@ class JobController extends Controller
      */
     public function __construct(protected JobPositionRepositoryInterface $jobPositionRepository, protected ApplicantRepositoryInterface $applicantRepository, protected FileService $fileService)
     {
-
     }
 
     /**
@@ -57,7 +56,7 @@ class JobController extends Controller
         if ($files) {
             foreach ($files as $file) {
                 $filePath = $this->fileService->storeFile($file);
-                $filesPath[] = ["file_url"=>$filePath];
+                $filesPath[] = ["file_url" => $filePath];
             }
         }
         $data = $req->validated();

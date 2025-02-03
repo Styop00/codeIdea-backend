@@ -28,7 +28,7 @@ class PortfolioCreateRequest extends FormRequest
             "title" => 'required|string|min:3',
             "color" => 'required|string|min:4',
             "about" => 'required|string|min:3',
-            'img'   => 'file|mimes:jpg,jpeg,svg,png,webp|max:2048'
+            'img' => 'file|mimes:jpg,jpeg,svg,png,webp|max:2048'
 
         ];
     }
@@ -40,11 +40,11 @@ class PortfolioCreateRequest extends FormRequest
     {
         return [
             "title.required" => "Title is required",
-            "title.min"      => "The title must have at least 3 characters.",
+            "title.min" => "The title must have at least 3 characters.",
             "color.required" => "color is required",
-            "color.min"      => "The color must have at least 6 characters.",
+            "color.min" => "The color must have at least 6 characters.",
             "about.required" => "The field about is required",
-            "about.min"      => "The field about must have at least 3 characters 3 characters",
+            "about.min" => "The field about must have at least 3 characters 3 characters",
 
         ];
     }

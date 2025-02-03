@@ -19,7 +19,7 @@ class PortfolioController extends Controller
      * @param PortfolioRepositoryInterface $portfolioRepository
      * @param FileService $fileService
      */
-    public function __construct(protected PortfolioRepositoryInterface $portfolioRepository,protected FileService $fileService)
+    public function __construct(protected PortfolioRepositoryInterface $portfolioRepository, protected FileService $fileService)
     {
     }
 
