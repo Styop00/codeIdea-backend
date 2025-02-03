@@ -15,7 +15,10 @@ class JobController extends Controller
 {
     protected $fileService;
 
-    public function __construct(protected JobPositionRepositoryInterface $jobPositionRepository, protected ApplicantRepositoryInterface $applicantRepository, FileService $fileService)
+    public function __construct(
+        protected JobPositionRepositoryInterface $jobPositionRepository,
+        protected ApplicantRepositoryInterface   $applicantRepository, FileService $fileService
+    )
     {
         $this->fileService = $fileService;
 
