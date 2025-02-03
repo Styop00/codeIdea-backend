@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Contracts\ArticleRepositoryInterface;
 use App\Http\Requests\ArticleCreateRequest;
 use App\Http\Requests\ArticleUpdateRequest;
@@ -27,8 +26,8 @@ class ArticleController extends Controller
      * @return JsonResponse
      */
     public function index(PaginationRequest $request) : JsonResponse {
-        $page = $request->validated();
-        $articles = $this->articleRepository->all($page['page']);
+        $data = $request->validated();
+        $articles = $this->articleRepository->all($data['page'], $data);
         return response()->json($articles);
     }
 
@@ -63,7 +62,12 @@ class ArticleController extends Controller
 
             $article = $this->articleRepository->create([
                 'title' => $data['title'],
+                'description' => $data['description'],
                 'body' => $data['body'],
+            ]);
+
+            $article->categories()->attach([
+                'category_id' => $request->category_id,
             ]);
 
             DB::commit();
@@ -86,6 +90,7 @@ class ArticleController extends Controller
 
         $this->articleRepository->update([
             'title' => $data['title'] ?? $article->title,
+            'description' => $data['description'] ?? $article->description,
             'body' => $data['body'] ?? $article->body,
         ], $articleId);
 

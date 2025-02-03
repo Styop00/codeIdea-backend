@@ -25,6 +25,8 @@ class PaginationRequest extends FormRequest
     {
         return [
             'page' => 'required',
+            'category_id' => 'integer',
+            'other' => 'string',
         ];
     }
 

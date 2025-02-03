@@ -25,6 +25,7 @@ class ArticleUpdateRequest extends FormRequest
     {
         return [
             'title' => 'string|max:50',
+            'description' => 'string|max:500',
             'body' => 'string',
         ];
     }
@@ -34,7 +35,8 @@ class ArticleUpdateRequest extends FormRequest
      */
     public function messages(): array {
         return [
-            'title.max' => 'The article title must contain a maximum of 50 characters',
+            'title.max' => 'The article title must contain a maximum of :max characters',
+            'description.max' => 'The article description must contain a maximum of :max characters',
         ];
     }
 
