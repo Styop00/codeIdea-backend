@@ -22,6 +22,6 @@ class JobPositionRepository implements \App\Http\Contracts\JobPositionRepository
      */
     public function find(int $id): JobPosition|null
     {
-        return JobPosition::query()->where('id',$id)->with(["opportunities","skills"])->first();
+        return JobPosition::query()->where('id', $id)->with(["opportunities", "skills"])->first();
     }
 }

@@ -14,12 +14,12 @@ class JobPositionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return[
-            "id"=>$this->id,
-            "title"=>$this->title,
-            "about"=>$this->about,
-            "opportunities"=>OpportunityResource::collection($this->whenLoaded("opportunities")),
-            "skills"=>SkillResource::collection($this->whenLoaded("skills"))
+        return [
+            "id"            => $this->id,
+            "title"         => $this->title,
+            "about"         => $this->about,
+            "opportunities" => OpportunityResource::collection($this->whenLoaded("opportunities")),
+            "skills"        => SkillResource::collection($this->whenLoaded("skills"))
         ];
     }
 }

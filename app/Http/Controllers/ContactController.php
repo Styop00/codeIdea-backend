@@ -12,14 +12,14 @@ class ContactController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(ContactMailRequest $req):JsonResponse
+    public function __invoke(ContactMailRequest $req): JsonResponse
     {
-        $name=$req->input("name");
-        $phone=$req->input("phone");
-        $email=$req->input("email");
-        $message=$req->input("message");
-        $contactMail=config('mail.from.address');
-        Mail::to($contactMail)->send(new ContactCompanyMail($name,$email,$phone,$message));
+        $name = $req->input("name");
+        $phone = $req->input("phone");
+        $email = $req->input("email");
+        $message = $req->input("message");
+        $contactMail = config('mail.from.address');
+        Mail::to($contactMail)->send(new ContactCompanyMail($name, $email, $phone, $message));
         return response()->json(['message' => 'Email sent successfully'], 200);
 
 

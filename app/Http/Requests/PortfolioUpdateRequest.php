@@ -25,22 +25,22 @@ class PortfolioUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title"=>'string|min:3',
-            "color"=>'string|min:4',
-            "about"=>'string|min:3',
-            'img'=>'nullable|file|mimes:jpg,jpeg,svg,png,webp|max:2048'
+            "title" => 'string|min:3',
+            "color" => 'string|min:4',
+            "about" => 'string|min:3',
+            'img'   => 'nullable|file|mimes:jpg,jpeg,svg,png,webp|max:2048'
         ];
     }
 
     /**
      * @return array
      */
-    public function messages():array
+    public function messages(): array
     {
         return [
-            "title.min"=>"The title must have at least 3 characters.",
-            "color.min"=>"The color must have at least 6 characters.",
-            "about.min"=>"The field about must have at least 3 characters 3 characters",
+            "title.min" => "The title must have at least 3 characters.",
+            "color.min" => "The color must have at least 6 characters.",
+            "about.min" => "The field about must have at least 3 characters 3 characters",
 
         ];
     }

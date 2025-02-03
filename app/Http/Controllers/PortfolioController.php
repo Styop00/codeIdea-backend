@@ -15,74 +15,79 @@ class PortfolioController extends Controller
 {
 
     protected $fileService;
+
     /**
      * @param PortfolioRepositoryInterface $portfolioRepository
      */
-    public function __construct(protected PortfolioRepositoryInterface $portfolioRepository, FileService $fileService){
+    public function __construct(protected PortfolioRepositoryInterface $portfolioRepository, FileService $fileService)
+    {
         $this->fileService = $fileService;
     }
 
     /**
      * @return AnonymousResourceCollection
      */
-    public function index():AnonymousResourceCollection{
-        $portfolio=$this->portfolioRepository->all();
+    public function index(): AnonymousResourceCollection
+    {
+        $portfolio = $this->portfolioRepository->all();
         return PortfolioResource::collection($portfolio);
-   }
+    }
 
 
     /**
      * @param PortfolioCreateRequest $request
      * @return Portfolio
      */
-    public function store(PortfolioCreateRequest $request ): PortfolioResource
+    public function store(PortfolioCreateRequest $request): PortfolioResource
     {
 
-        $imagePath=null;
+        $imagePath = null;
         $img = $request->file('img');
-        if($img){
-            $imagePath=$this->fileService->storeFile($img);
+        if ($img) {
+            $imagePath = $this->fileService->storeFile($img);
         }
-        $portfolioData=$request->validated();
-        $portfolioData['img_url']=$imagePath;
-        $portfolio=$this->portfolioRepository->create($portfolioData);
+        $portfolioData = $request->validated();
+        $portfolioData['img_url'] = $imagePath;
+        $portfolio = $this->portfolioRepository->create($portfolioData);
         return new PortfolioResource($portfolio);
-   }
+    }
 
     /**
      * @param int $id
      * @param PortfolioUpdateRequest $request
      * @return bool
      */
-    public function update( PortfolioUpdateRequest $request,int $portfolio_id):PortfolioResource{
+    public function update(PortfolioUpdateRequest $request, int $portfolio_id): PortfolioResource
+    {
 
-        $imagePath=null;
-        $img=$request->file('img');
-        if($img){
-            $imagePath=$this->fileService->storeFile($img);
+        $imagePath = null;
+        $img = $request->file('img');
+        if ($img) {
+            $imagePath = $this->fileService->storeFile($img);
         }
-        $portfolioData=$request->validated();
-        $portfolioData["img_url"]=$imagePath;
-        $this->portfolioRepository->update($portfolioData,$portfolio_id);
-         return new PortfolioResource(Portfolio::query()->where('id',$portfolio_id)->first());
-   }
+        $portfolioData = $request->validated();
+        $portfolioData["img_url"] = $imagePath;
+        $this->portfolioRepository->update($portfolioData, $portfolio_id);
+        return new PortfolioResource(Portfolio::query()->where('id', $portfolio_id)->first());
+    }
 
     /**
      * @param int $portfolio_id
      * @return Portfolio
      */
     public function show(Portfolio $portfolio): PortfolioResource
-   {
-    return new PortfolioResource($portfolio);
-   }
+    {
+        return new PortfolioResource($portfolio);
+    }
 
     /**
      * @param int $portfolio_id
      * @return bool
      */
-    public function destroy(int $portfolio_id):JsonResponse{
-         $this->portfolioRepository->delete($portfolio_id);
-         return response()->json(['message' => 'Portfolio deleted successfully!']);
+    public function destroy(int $portfolio_id): JsonResponse
+    {
+        $this->portfolioRepository->delete($portfolio_id);
+        return response()->json(['message' => 'Portfolio deleted successfully!']);
 
     }
 }

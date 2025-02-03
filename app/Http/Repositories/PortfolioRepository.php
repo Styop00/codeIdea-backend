@@ -34,13 +34,13 @@ class PortfolioRepository implements \App\Http\Contracts\PortfolioRepositoryInte
     public function create(array $data): Portfolio
     {
 
-            return Portfolio::query()->create([
-                'title' => $data["title"],
-                'about' => $data["about"],
-                'color' => $data['color'],
-                'img_url'=>$data['img_url']
+        return Portfolio::query()->create([
+            'title'   => $data["title"],
+            'about'   => $data["about"],
+            'color'   => $data['color'],
+            'img_url' => $data['img_url']
 
-            ]);
+        ]);
 
 
     }
@@ -52,7 +52,7 @@ class PortfolioRepository implements \App\Http\Contracts\PortfolioRepositoryInte
      */
     public function update(array $data, int $id): bool
     {
-        return Portfolio::query()->where('id',$id)->update($data);
+        return Portfolio::query()->where('id', $id)->update($data);
     }
 
     /**
@@ -61,7 +61,7 @@ class PortfolioRepository implements \App\Http\Contracts\PortfolioRepositoryInte
      */
     public function delete(int $id): bool
     {
-        return Portfolio::query()->where('id',$id)->delete();
+        return Portfolio::query()->where('id', $id)->delete();
 
     }
 

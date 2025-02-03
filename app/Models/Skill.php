@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Skill extends Model
 {
-    protected $guarded=[];
+    protected $guarded = [];
 
     /**
      * @return BelongsTo
      */
-    public function jobPosition():BelongsTo{
+    public function jobPosition(): BelongsTo
+    {
         return $this->belongsTo(JobPosition::class);
     }
 }

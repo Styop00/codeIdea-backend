@@ -25,14 +25,15 @@ class ArticleUpdateRequest extends FormRequest
     {
         return [
             'title' => 'string|max:50',
-            'body' => 'string',
+            'body'  => 'string',
         ];
     }
 
     /**
      * @return array
      */
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'title.max' => 'The article title must contain a maximum of 50 characters',
         ];
@@ -42,7 +43,8 @@ class ArticleUpdateRequest extends FormRequest
      * @param Validator $validator
      * @return string
      */
-    public function failedValidation(Validator $validator) : string {
+    public function failedValidation(Validator $validator): string
+    {
         throw new HttpResponseException(response()->json([
             'message' => $validator->messages()->first(),
         ]));

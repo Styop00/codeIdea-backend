@@ -20,13 +20,16 @@ class ArticleController extends Controller
     /**
      * @param ArticleRepositoryInterface $articleRepository
      */
-    public function __construct(protected ArticleRepositoryInterface $articleRepository ) {}
+    public function __construct(protected ArticleRepositoryInterface $articleRepository)
+    {
+    }
 
     /**
      * @param PaginationRequest $request
      * @return JsonResponse
      */
-    public function index(PaginationRequest $request) : JsonResponse {
+    public function index(PaginationRequest $request): JsonResponse
+    {
         $page = $request->validated();
         $articles = $this->articleRepository->all($page['page']);
         return response()->json($articles);
@@ -36,7 +39,8 @@ class ArticleController extends Controller
      * @param int $articleId
      * @return JsonResponse
      */
-    public function show(int $articleId) : JsonResponse {
+    public function show(int $articleId): JsonResponse
+    {
         $article = $this->articleRepository->find($articleId);
 
         return response()->json($article);
@@ -46,7 +50,8 @@ class ArticleController extends Controller
      * @param int $currentArticleId
      * @return JsonResponse
      */
-    public function getRandomArticles(int $currentArticleId) : JsonResponse {
+    public function getRandomArticles(int $currentArticleId): JsonResponse
+    {
         $articles = $this->articleRepository->getRandomArticles($currentArticleId);
         return response()->json($articles);
     }
@@ -55,7 +60,8 @@ class ArticleController extends Controller
      * @param ArticleCreateRequest $request
      * @return ArticleResource
      */
-    public function store(ArticleCreateRequest $request) : ArticleResource {
+    public function store(ArticleCreateRequest $request): ArticleResource
+    {
         try {
             $data = $request->validated();
 
@@ -63,7 +69,7 @@ class ArticleController extends Controller
 
             $article = $this->articleRepository->create([
                 'title' => $data['title'],
-                'body' => $data['body'],
+                'body'  => $data['body'],
             ]);
 
             DB::commit();
@@ -80,13 +86,14 @@ class ArticleController extends Controller
      * @param int $articleId
      * @return ArticleResource
      */
-    public function update(ArticleUpdateRequest $request, int $articleId) : ArticleResource {
+    public function update(ArticleUpdateRequest $request, int $articleId): ArticleResource
+    {
         $data = $request->validated();
         $article = $this->articleRepository->find($articleId);
 
         $this->articleRepository->update([
             'title' => $data['title'] ?? $article->title,
-            'body' => $data['body'] ?? $article->body,
+            'body'  => $data['body'] ?? $article->body,
         ], $articleId);
 
         return new ArticleResource($this->articleRepository->find($articleId));
@@ -96,7 +103,8 @@ class ArticleController extends Controller
      * @param $articleId
      * @return JsonResponse
      */
-    public function destroy(int $articleId) : JsonResponse {
+    public function destroy(int $articleId): JsonResponse
+    {
         $article = $this->articleRepository->delete($articleId);
         return response()->json(['message' => 'Article deleted successfully!']);
     }

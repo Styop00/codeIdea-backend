@@ -9,12 +9,12 @@ use App\Http\Controllers\UserController;
 
 
 Route::resources([
-    'articles' => ArticleController::class,
-    'users' => UserController::class,
+    'articles'  => ArticleController::class,
+    'users'     => UserController::class,
     'portfolio' => PortfolioController::class,
-    "jobs" => JobController::class
+    "jobs"      => JobController::class
 ]);
 Route::post("/mail", ContactController::class);
-Route::post('jobs/apply/{id}',[JobController::class,"apply"]);
+Route::post('jobs/apply/{id}', [JobController::class, "apply"]);
 Route::get('random/{id}', [ArticleController::class, 'getRandomArticles']);
 

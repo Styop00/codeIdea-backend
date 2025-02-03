@@ -7,26 +7,29 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class JobPosition extends Model
 {
-    protected $guarded=[];
+    protected $guarded = [];
 
     /**
      * @return HasMany
      */
-    public function skills():HasMany{
+    public function skills(): HasMany
+    {
         return $this->hasMany(Skill::class);
     }
 
     /**
      * @return HasMany
      */
-    public function opportunities():HasMany{
+    public function opportunities(): HasMany
+    {
         return $this->hasMany(Opportunity::class);
     }
 
     /**
      * @return HasMany
      */
-    public function applicants():HasMany{
+    public function applicants(): HasMany
+    {
         return $this->hasMany(Applicant::class);
     }
 }
