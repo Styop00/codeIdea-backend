@@ -14,14 +14,13 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 class PortfolioController extends Controller
 {
 
-    protected $fileService;
 
     /**
      * @param PortfolioRepositoryInterface $portfolioRepository
+     * @param FileService $fileService
      */
-    public function __construct(protected PortfolioRepositoryInterface $portfolioRepository, FileService $fileService)
+    public function __construct(protected PortfolioRepositoryInterface $portfolioRepository,protected FileService $fileService)
     {
-        $this->fileService = $fileService;
     }
 
     /**
@@ -36,7 +35,7 @@ class PortfolioController extends Controller
 
     /**
      * @param PortfolioCreateRequest $request
-     * @return Portfolio
+     * @return PortfolioResource
      */
     public function store(PortfolioCreateRequest $request): PortfolioResource
     {
@@ -53,9 +52,9 @@ class PortfolioController extends Controller
     }
 
     /**
-     * @param int $id
      * @param PortfolioUpdateRequest $request
-     * @return bool
+     * @param int $portfolio_id
+     * @return PortfolioResource
      */
     public function update(PortfolioUpdateRequest $request, int $portfolio_id): PortfolioResource
     {
@@ -72,8 +71,8 @@ class PortfolioController extends Controller
     }
 
     /**
-     * @param int $portfolio_id
-     * @return Portfolio
+     * @param Portfolio $portfolio
+     * @return PortfolioResource
      */
     public function show(Portfolio $portfolio): PortfolioResource
     {
@@ -82,7 +81,7 @@ class PortfolioController extends Controller
 
     /**
      * @param int $portfolio_id
-     * @return bool
+     * @return JsonResponse
      */
     public function destroy(int $portfolio_id): JsonResponse
     {

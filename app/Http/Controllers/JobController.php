@@ -13,51 +13,57 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class JobController extends Controller
 {
-    protected $fileService;
 
-    public function __construct(protected JobPositionRepositoryInterface $jobPositionRepository, protected ApplicantRepositoryInterface $applicantRepository, FileService $fileService)
+    /**
+     * @param JobPositionRepositoryInterface $jobPositionRepository
+     * @param ApplicantRepositoryInterface $applicantRepository
+     * @param FileService $fileService
+     */
+    public function __construct(protected JobPositionRepositoryInterface $jobPositionRepository, protected ApplicantRepositoryInterface $applicantRepository, protected FileService $fileService)
     {
-        $this->fileService = $fileService;
 
     }
 
+    /**
+     * @return AnonymousResourceCollection
+     */
     public function index(): AnonymousResourceCollection
     {
         $jobPosition = $this->jobPositionRepository->all();
         return JobPositionResource::collection($jobPosition);
     }
 
+    /**
+     * @param int $id
+     * @return JobPositionResource
+     */
     public function show(int $id): JobPositionResource
     {
         $jobPosition = $this->jobPositionRepository->find($id);
         return new JobPositionResource($jobPosition);
     }
 
+    /**
+     * @param ApplicantRequest $req
+     * @param $id
+     * @return JsonResponse
+     */
     public function apply(ApplicantRequest $req, $id): JsonResponse
     {
         $cv = $req->file("cv_applicant");
-        $files = $req->file("additional_file");
+        $files = $req->file("additional_files");
         $cv_path = $this->fileService->storeFile($cv);
         $filesPath = [];
         if ($files) {
             foreach ($files as $file) {
                 $filePath = $this->fileService->storeFile($file);
-                $filesPath[] = $filePath;
+                $filesPath[] = ["file_url"=>$filePath];
             }
         }
         $data = $req->validated();
         $data["cv_applicant"] = $cv_path;
         $applicant = $this->applicantRepository->create($data, $id);
-        $filesApplicants = [];
-        if (isset($data["additional_file"]) && count($data['additional_file']) > 0) {
-            foreach ($data['additional_file'] as $file) {
-                $filesApplicants[] = [
-                    'file_url' => $file,
-                ];
-            }
-            $applicant->files()->createMany($filesApplicants);
-        }
-
+        $applicant->files()->createMany($filesPath);
         return response()->json([
             "message" => "ok"
         ]);

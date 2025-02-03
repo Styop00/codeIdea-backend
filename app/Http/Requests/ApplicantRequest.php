@@ -31,8 +31,8 @@ class ApplicantRequest extends FormRequest
             "applied_date"      => "date",
             "about_applicant"   => 'string',
             "cv_applicant"      => "required|file|mimes:pdf|max:2048",
-            "additional_file"   => 'array',
-            "additional_file.*" => 'file|max:2048'
+            "additional_files"   => 'array',
+            "additional_files.*" => 'file|max:2048'
         ];
     }
 
@@ -57,10 +57,10 @@ class ApplicantRequest extends FormRequest
             "cv_applicant.file"         => "CV must be a valid file.",
             "cv_applicant.mimes"        => "CV must be a PDF file.",
             "cv_applicant.max"          => "CV size must not exceed 2MB.",
-            "additional_file.array"     => "Additional files must be an array.",
-            "additional_file.*.file"    => "Each file must be a valid file.",
-            "additional_file.*.mimes"   => "Accepted file formats: PDF, JPG, PNG.",
-            "additional_file.*.max"     => "Each file must not exceed 2MB.",
+            "additional_files.array"     => "Additional files must be an array.",
+            "additional_files.*.file"    => "Each file must be a valid file.",
+            "additional_files.*.mimes"   => "Accepted file formats: PDF, JPG, PNG.",
+            "additional_files.*.max"     => "Each file must not exceed 2MB.",
         ];
     }
 
