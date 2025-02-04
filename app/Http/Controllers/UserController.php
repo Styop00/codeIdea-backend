@@ -38,26 +38,21 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request): UserResource
     {
-        try {
-            $data = $request->validated();
+        $data = $request->validated();
 
-            DB::beginTransaction();
+        DB::beginTransaction();
 
-            $user = $this->userRepository->create([
-                'firstname'   => $data['firstname'],
-                'lastname'    => $data['lastname'],
-                'picture'     => $data['picture'],
-                'position'    => $data['position'],
-                'description' => $data['description'],
-            ]);
+        $user = $this->userRepository->create([
+            'firstname'   => $data['firstname'],
+            'lastname'    => $data['lastname'],
+            'picture'     => $data['picture'],
+            'position'    => $data['position'],
+            'description' => $data['description'],
+        ]);
 
-            DB::commit();
+        DB::commit();
 
-            return new UserResource($user);
-        } catch (\Exception $e) {
-            DB::rollback();
-            return new UserResource(['status' => 'Error! Unable to create user.']);
-        }
+        return new UserResource($user);
     }
 
     /**

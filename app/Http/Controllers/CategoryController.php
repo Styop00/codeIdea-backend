@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CategoryController extends Controller
 {
@@ -38,22 +39,17 @@ class CategoryController extends Controller
      */
     public function store(CategoryCreateRequest $request): CategoryResource
     {
-        try {
-            $data = $request->validated();
+        $data = $request->validated();
 
-            DB::beginTransaction();
+        DB::beginTransaction();
 
-            $category = $this->categoryRepository->create([
-                'category_name' => $data['category_name'],
-            ]);
+        $category = $this->categoryRepository->create([
+            'category_name' => $data['category_name'],
+        ]);
 
-            DB::commit();
+        DB::commit();
 
-            return new CategoryResource($category);
-        } catch (\Exception $e) {
-            DB::rollback();
-            return new CategoryResource(['status' => 'Error! Unable to create category.']);
-        }
+        return new CategoryResource($category);
     }
 
     /**
@@ -79,7 +75,7 @@ class CategoryController extends Controller
      */
     public function destroy(int $category_id): JsonResponse
     {
-        $cagegory = $this->categoryRepository->delete($category_id);
+        $this->categoryRepository->delete($category_id);
         return response()->json(['message' => 'Category deleted successfully!']);
     }
 }

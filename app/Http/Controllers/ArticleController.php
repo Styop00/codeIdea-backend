@@ -57,9 +57,9 @@ class ArticleController extends Controller
 
     /**
      * @param ArticleCreateRequest $request
-     * @return ArticleResource
+     * @return ArticleResource | JsonResponse
      */
-    public function store(ArticleCreateRequest $request): ArticleResource
+    public function store(ArticleCreateRequest $request): ArticleResource | JsonResponse
     {
         try {
             $data = $request->validated();
@@ -81,7 +81,7 @@ class ArticleController extends Controller
             return new ArticleResource($article);
         } catch (\Exception $e) {
             DB::rollback();
-            return new ArticleResource(['status' => 'Error! Unable to create article.']);
+            return response()->json($e->getMessage());
         }
     }
 
