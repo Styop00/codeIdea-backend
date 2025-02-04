@@ -24,26 +24,28 @@ class ContactMailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name"=>"required|min:3|string",
-            'phone'=>"required|min:5",
-            "message"=>'required|string|min:5',
-            "email"=>"email|required|min:5"
+            "name"    => "required|min:3|string",
+            'phone'   => "required|min:5",
+            "message" => 'required|string|min:5',
+            "email"   => "email|required|min:5"
         ];
     }
-    public function messages():array
+
+    public function messages(): array
     {
         return [
-          "name.required"=>"Name is required",
-          "name.min"=>"The name must have at least 3 characters",
-          "phone.min"=>"The phone must have at least 5 characters" ,
-          "message.min"=>"The message field must have at least 5 characters" ,
-          "email.min"=>"The email field must have at least 3 characters" ,
-            "phone.required"=>"Phone is required",
-            "message"=>"message is required",
-            "email"=>"Email is required",
+            "name.required"  => "Name is required",
+            "name.min"       => "The name must have at least 3 characters",
+            "phone.min"      => "The phone must have at least 5 characters",
+            "message.min"    => "The message field must have at least 5 characters",
+            "email.min"      => "The email field must have at least 3 characters",
+            "phone.required" => "Phone is required",
+            "message"        => "message is required",
+            "email"          => "Email is required",
         ];
 
     }
+
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

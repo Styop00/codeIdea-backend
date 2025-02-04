@@ -10,8 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->string('description')->after('title');
+        Schema::create('opportunities', function (Blueprint $table) {
+            $table->id();
+            $table->string("opportunity_name");
+            $table->foreignId("job_position_id")->constrained("job_positions")->onDelete("cascade");
+            $table->timestamps();
         });
     }
 
@@ -20,8 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->dropColumn('description');
-        });
+        Schema::dropIfExists('opportunities');
     }
 };

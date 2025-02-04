@@ -25,18 +25,19 @@ class ArticleCreateRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:50',
-            'body' => 'required|string',
+            'body'  => 'required|string',
         ];
     }
 
     /**
      * @return array
      */
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'title.required' => 'The article must have a title',
-            'title.max' => 'The article title must contain a maximum of 50 characters',
-            'body.required' => 'The article must have a body',
+            'title.max'      => 'The article title must contain a maximum of 50 characters',
+            'body.required'  => 'The article must have a body',
         ];
     }
 
@@ -44,7 +45,8 @@ class ArticleCreateRequest extends FormRequest
      * @param Validator $validator
      * @return string
      */
-    public function failedValidation(Validator $validator) : string {
+    public function failedValidation(Validator $validator): string
+    {
         throw new HttpResponseException(response()->json([
             'message' => $validator->messages()->first(),
         ]));

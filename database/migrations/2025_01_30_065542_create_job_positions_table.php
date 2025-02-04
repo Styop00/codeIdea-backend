@@ -10,8 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->string('description')->after('title');
+        Schema::create('job_positions', function (Blueprint $table) {
+            $table->id();
+            $table->string("title");
+            $table->string("about");
+            $table->text("description");
+            $table->timestamps();
         });
     }
 
@@ -20,8 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->dropColumn('description');
-        });
+        Schema::dropIfExists('job_positions');
     }
 };
