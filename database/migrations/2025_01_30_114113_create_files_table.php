@@ -10,10 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('article_category', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('article_id')->unsigned();
-            $table->bigInteger('category_id')->unsigned();
+            $table->foreignId("applicant_id")->constrained("applicants")->onDelete("cascade");
+            $table->string("file_url");
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('article_category');
+        Schema::dropIfExists('files');
     }
 };

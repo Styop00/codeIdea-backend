@@ -31,7 +31,8 @@ class CategoryUpdateRequest extends FormRequest
     /**
      * @return array
      */
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'category_name.max' => 'The category must contain a maximum of 50 characters',
         ];
@@ -41,7 +42,8 @@ class CategoryUpdateRequest extends FormRequest
      * @param Validator $validator
      * @return string
      */
-    public function failedValidation(Validator $validator) : string {
+    public function failedValidation(Validator $validator): string
+    {
         throw new HttpResponseException(response()->json([
             'message' => $validator->messages()->first(),
         ]));

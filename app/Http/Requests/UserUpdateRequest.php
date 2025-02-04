@@ -24,10 +24,10 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstname' => 'string|max:255',
-            'lastname' => 'max:255',
-            'picture' => 'string',
-            'position' => 'string',
+            'firstname'   => 'string|max:255',
+            'lastname'    => 'max:255',
+            'picture'     => 'string',
+            'position'    => 'string',
             'description' => '',
         ];
     }
@@ -39,7 +39,7 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'firstname.max' => 'A firstname must be max. :max characters',
-            'lastname.max' => 'A lastname must be max. :max characters',
+            'lastname.max'  => 'A lastname must be max. :max characters',
         ];
     }
 

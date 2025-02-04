@@ -6,24 +6,29 @@ use App\Http\Contracts\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
-class UserRepository implements UserRepositoryInterface {
+class UserRepository implements UserRepositoryInterface
+{
     /**
      * @param User $user
-     */    
-    public function __construct(protected User $user) {}
+     */
+    public function __construct(protected User $user)
+    {
+    }
 
     /**
      * @param int $id
      * @return User | null
      */
-    public function find(int $id) : User | null {
+    public function find(int $id): User|null
+    {
         return $this->user->where('id', $id)->first();
     }
 
     /**
-     * @return Collection 
+     * @return Collection
      */
-    public function all() : Collection {
+    public function all(): Collection
+    {
         return $this->user->all();
     }
 
@@ -31,7 +36,8 @@ class UserRepository implements UserRepositoryInterface {
      * @param array $data
      * @return User
      */
-    public function create(array $data) : User {
+    public function create(array $data): User
+    {
         return $this->user->create($data);
     }
 
@@ -40,7 +46,8 @@ class UserRepository implements UserRepositoryInterface {
      * @param int $id
      * @return bool
      */
-    public function update(array $data, int $id) : bool {
+    public function update(array $data, int $id): bool
+    {
         return $this->user->where('id', $id)->update($data);
     }
 
@@ -48,7 +55,8 @@ class UserRepository implements UserRepositoryInterface {
      * @param int $id
      * @return bool
      */
-    public function delete(int $id) : bool {
+    public function delete(int $id): bool
+    {
         return $this->user->destroy($id);
     }
 }

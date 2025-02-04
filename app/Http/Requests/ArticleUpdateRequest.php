@@ -24,18 +24,19 @@ class ArticleUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'string|max:50',
+            'title'       => 'string|max:50',
             'description' => 'string|max:500',
-            'body' => 'string',
+            'body'        => 'string',
         ];
     }
 
     /**
      * @return array
      */
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
-            'title.max' => 'The article title must contain a maximum of :max characters',
+            'title.max'       => 'The article title must contain a maximum of :max characters',
             'description.max' => 'The article description must contain a maximum of :max characters',
         ];
     }
@@ -44,7 +45,8 @@ class ArticleUpdateRequest extends FormRequest
      * @param Validator $validator
      * @return string
      */
-    public function failedValidation(Validator $validator) : string {
+    public function failedValidation(Validator $validator): string
+    {
         throw new HttpResponseException(response()->json([
             'message' => $validator->messages()->first(),
         ]));

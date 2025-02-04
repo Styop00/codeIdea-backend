@@ -24,10 +24,10 @@ class UserCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'max:255',
-            'picture' => 'required|string',
-            'position' => 'required|string',
+            'firstname'   => 'required|string|max:255',
+            'lastname'    => 'max:255',
+            'picture'     => 'required|string',
+            'position'    => 'required|string',
             'description' => '',
         ];
     }
@@ -39,10 +39,10 @@ class UserCreateRequest extends FormRequest
     {
         return [
             'firstname.required' => 'A firstname is required',
-            'firstname.max' => 'A firstname must be max. :max characters',
-            'lastname.max' => 'A lastname must be max. :max characters',
-            'picture.required' => 'A picture is required',
-            'position.required' => 'A position is required',
+            'firstname.max'      => 'A firstname must be max. :max characters',
+            'lastname.max'       => 'A lastname must be max. :max characters',
+            'picture.required'   => 'A picture is required',
+            'position.required'  => 'A position is required',
         ];
     }
 

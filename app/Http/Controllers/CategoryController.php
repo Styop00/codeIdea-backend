@@ -19,12 +19,15 @@ class CategoryController extends Controller
     /**
      * @param CategoryRepositoryInterface $categoryRepository
      */
-    public function __construct(protected CategoryRepositoryInterface $categoryRepository ) {}
+    public function __construct(protected CategoryRepositoryInterface $categoryRepository)
+    {
+    }
 
     /**
      * @return JsonResponse
      */
-    public function index() : JsonResponse {
+    public function index(): JsonResponse
+    {
         $categories = $this->categoryRepository->all();
         return response()->json($categories);
     }
@@ -33,7 +36,8 @@ class CategoryController extends Controller
      * @param CategoryCreateRequest $request
      * @return CategoryResource
      */
-    public function store(CategoryCreateRequest $request) : CategoryResource {
+    public function store(CategoryCreateRequest $request): CategoryResource
+    {
         try {
             $data = $request->validated();
 
@@ -46,9 +50,9 @@ class CategoryController extends Controller
             DB::commit();
 
             return new CategoryResource($category);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['status' => 'Error! Unable to create category.']);
+            return new CategoryResource(['status' => 'Error! Unable to create category.']);
         }
     }
 
@@ -57,7 +61,8 @@ class CategoryController extends Controller
      * @param int $category_id
      * @return CategoryResource
      */
-    public function update(CategoryUpdateRequest $request, int $category_id) : CategoryResource {
+    public function update(CategoryUpdateRequest $request, int $category_id): CategoryResource
+    {
         $data = $request->validated();
         $category = $this->categoryRepository->find($category_id);
 
@@ -69,10 +74,11 @@ class CategoryController extends Controller
     }
 
     /**
-     * @param $category_id
+     * @param int $category_id
      * @return JsonResponse
      */
-    public function destroy(int $category_id) : JsonResponse {
+    public function destroy(int $category_id): JsonResponse
+    {
         $cagegory = $this->categoryRepository->delete($category_id);
         return response()->json(['message' => 'Category deleted successfully!']);
     }

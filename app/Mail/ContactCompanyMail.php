@@ -51,10 +51,10 @@ class ContactCompanyMail extends Mailable implements ShouldQueue
         return new Content(
             view: 'contact-us',
             with: [
-                'name' => $this->name,
+                'name'  => $this->name,
                 'email' => $this->email,
                 'phone' => $this->phone,
-                'body' => $this->body
+                'body'  => $this->body
             ]
         );
     }

@@ -15,11 +15,11 @@ class ArticleSeeder extends Seeder
     {
         DB::table('articles')->insert([
             [
-                'title' => 'Breaking the Mold: How AI is Redefining Excellence',
+                'title'       => 'Breaking the Mold: How AI is Redefining Excellence',
                 'description' => 'Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving...',
-                'body' => '<p class="mb-5">Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving. </p> <img src="' . config('app.url') . '/storage/aa.png">',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'body'        => '<p class="mb-5">Learn how AI sets a new standard for agency excellence by automating tasks, enhancing creativity, and driving. </p> <img src="' . config('app.url') . '/storage/aa.png">',
+                'created_at'  => now(),
+                'updated_at'  => now(),
             ],
         ]);
     }
