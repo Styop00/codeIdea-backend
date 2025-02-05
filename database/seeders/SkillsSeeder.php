@@ -21,8 +21,6 @@ class SkillsSeeder extends Seeder
             ["skill_name" => "Negotiation and change management", "job_position_id" => 1],
             ["skill_name" => "English C1", "job_position_id" => 1],
             ["skill_name" => "Quick recruitment process", "job_position_id" => 1],
-
-
         ]);
     }
 }
