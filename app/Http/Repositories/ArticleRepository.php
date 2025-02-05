@@ -5,6 +5,7 @@ namespace App\Http\Repositories;
 use App\Http\Contracts\ArticleRepositoryInterface;
 use App\Models\Article;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
@@ -26,20 +27,31 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     /**
      * @param int $id
-     * @return Article | null
+     * @return Collection
      */
-    public function getRandomArticles(int $id)
+    public function getRandomArticles(int $id): Collection
     {
         return $this->article->where('id', '!=', $id)->inRandomOrder()->limit(3)->get();
     }
 
     /**
      * @param int $page
+     * @param array $data
      * @return LengthAwarePaginator
      */
-    public function all(int $page): LengthAwarePaginator
+    public function all(int $page, array $data): LengthAwarePaginator
     {
-        return $this->article->paginate(10);
+        if (isset($data['category_id'])) {
+            $category_id = $data['category_id'];
+
+            return $this->article->withWhereHas('categories', function ($query) use ($category_id) {
+                $query->where('category_id', '=', $category_id);
+            })->paginate(10);
+        } elseif (isset($data['other'])) {
+            return $this->article->whereDoesntHave('categories')->paginate(10);
+        } else {
+            return $this->article->paginate(10);
+        }
     }
 
     /**

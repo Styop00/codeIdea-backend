@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
+            \App\Http\Contracts\CategoryRepositoryInterface::class,
+            \App\Http\Repositories\CategoryRepository::class,
+        );
+
+        $this->app->singleton(
             PortfolioRepositoryInterface::class,
             PortfolioRepository::class,
         );

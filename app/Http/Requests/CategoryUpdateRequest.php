@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ArticleCreateRequest extends FormRequest
+class CategoryUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class ArticleCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'       => 'required|string|max:50',
-            'description' => 'required|string|max:500',
-            'body'        => 'required|string',
+            'category_name' => 'string|max:50'
         ];
     }
 
@@ -36,11 +34,7 @@ class ArticleCreateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required'       => 'The article must have a title',
-            'title.max'            => 'The article title must contain a maximum of :max characters',
-            'description.required' => 'The article must have a description',
-            'description.max'      => 'The article description must contain a maximum of :max characters',
-            'body.required'        => 'The article must have a body',
+            'category_name.max' => 'The category must contain a maximum of 50 characters',
         ];
     }
 

@@ -24,7 +24,9 @@ class PaginationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'page' => 'required',
+            'page'        => 'required',
+            'category_id' => 'integer',
+            'other'       => 'string',
         ];
     }
 

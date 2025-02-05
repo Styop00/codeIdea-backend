@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Contracts\ArticleRepositoryInterface;
 use App\Http\Requests\ArticleCreateRequest;
 use App\Http\Requests\ArticleUpdateRequest;
@@ -30,8 +29,8 @@ class ArticleController extends Controller
      */
     public function index(PaginationRequest $request): JsonResponse
     {
-        $page = $request->validated();
-        $articles = $this->articleRepository->all($page['page']);
+        $data = $request->validated();
+        $articles = $this->articleRepository->all($data['page'], $data);
         return response()->json($articles);
     }
 
@@ -58,9 +57,9 @@ class ArticleController extends Controller
 
     /**
      * @param ArticleCreateRequest $request
-     * @return ArticleResource
+     * @return ArticleResource | JsonResponse
      */
-    public function store(ArticleCreateRequest $request): ArticleResource
+    public function store(ArticleCreateRequest $request): ArticleResource | JsonResponse
     {
         try {
             $data = $request->validated();
@@ -68,16 +67,21 @@ class ArticleController extends Controller
             DB::beginTransaction();
 
             $article = $this->articleRepository->create([
-                'title' => $data['title'],
-                'body'  => $data['body'],
+                'title'       => $data['title'],
+                'description' => $data['description'],
+                'body'        => $data['body'],
+            ]);
+
+            $article->categories()->attach([
+                'category_id' => $request->category_id,
             ]);
 
             DB::commit();
 
             return new ArticleResource($article);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['status' => 'Error! Unable to create article.']);
+            return response()->json($e->getMessage());
         }
     }
 
@@ -92,15 +96,16 @@ class ArticleController extends Controller
         $article = $this->articleRepository->find($articleId);
 
         $this->articleRepository->update([
-            'title' => $data['title'] ?? $article->title,
-            'body'  => $data['body'] ?? $article->body,
+            'title'       => $data['title'] ?? $article->title,
+            'description' => $data['description'] ?? $article->description,
+            'body'        => $data['body'] ?? $article->body,
         ], $articleId);
 
         return new ArticleResource($this->articleRepository->find($articleId));
     }
 
     /**
-     * @param $articleId
+     * @param int $articleId
      * @return JsonResponse
      */
     public function destroy(int $articleId): JsonResponse
