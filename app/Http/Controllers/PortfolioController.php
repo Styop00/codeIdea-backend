@@ -13,8 +13,6 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class PortfolioController extends Controller
 {
-
-
     /**
      * @param PortfolioRepositoryInterface $portfolioRepository
      * @param FileService $fileService

@@ -18,7 +18,7 @@ class FeedbackRepository implements FeedbackRepositoryInterface
     /**
      * @return Collection
      */
-    public function all(array $relations=[]): Collection
+    public function all(array $relations = []): Collection
     {
         return $this->feedback->with($relations)->get();
     }
@@ -29,7 +29,7 @@ class FeedbackRepository implements FeedbackRepositoryInterface
      */
     public function find(int $id): Feedback|null
     {
-        return $this->feedback->with('user')->find($id);
+        return $this->feedback->find($id);
     }
 
     /**

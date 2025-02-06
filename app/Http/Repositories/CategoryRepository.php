@@ -27,9 +27,9 @@ class CategoryRepository implements CategoryRepositoryInterface
     /**
      * @return Collection
      */
-    public function all(): Collection
+    public function all(array $relations = []): Collection
     {
-        return Category::with('articles')->get();
+        return Category::with($relations)->get();
     }
 
     /**

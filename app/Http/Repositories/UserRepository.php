@@ -27,9 +27,9 @@ class UserRepository implements UserRepositoryInterface
     /**
      * @return Collection
      */
-    public function all(): Collection
+    public function all($relations = []): Collection
     {
-        return $this->user->with('feedbacks')->get();
+        return $this->user->with($relations)->get();
     }
 
     /**

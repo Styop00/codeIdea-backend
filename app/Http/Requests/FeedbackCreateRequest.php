@@ -25,14 +25,15 @@ class FeedbackCreateRequest extends FormRequest
     {
         return [
             'feedback' => 'required|string',
-            'user_id' => 'required|integer|exists:users.id',
+            'user_id'  => 'required|integer|exists:users.id',
         ];
     }
 
     /**
      * @return array
      */
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'feedback.required' => 'Feedback is required',
         ];

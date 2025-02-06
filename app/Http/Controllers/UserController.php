@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        $users = $this->userRepository->all();
+        $users = $this->userRepository->all(['feedbacks']);
         return UserResource::collection($users);
     }
 

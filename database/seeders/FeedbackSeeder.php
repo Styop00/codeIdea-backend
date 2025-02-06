@@ -15,29 +15,29 @@ class FeedbackSeeder extends Seeder
     {
         DB::table('feedback')->insert([
             [
-                "user_id" => 1,
+                "user_id"  => 1,
                 "feedback" => 'feedback 1',
             ],
             [
-                "user_id" => 2,
+                "user_id"  => 2,
                 "feedback" => 'feedback 2',
             ],
             [
-                "user_id" => 1,
+                "user_id"  => 1,
                 "feedback" => 'feedback 3',
             ],
             [
-                "user_id" => 2,
+                "user_id"  => 2,
                 "feedback" => 'feedback 4',
             ],
 
             [
-                "user_id" => 2,
+                "user_id"  => 2,
                 "feedback" => 'feedback 5',
             ],
 
             [
-                "user_id" => 2,
+                "user_id"  => 2,
                 "feedback" => 'feedback 6',
             ],
         ]);

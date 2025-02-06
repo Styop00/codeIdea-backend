@@ -28,7 +28,7 @@ class ArticleController extends Controller
     public function index(PaginationRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $articles = $this->articleRepository->all($data['page'], $data);
+        $articles = $this->articleRepository->all($data['page'], $data, ['categories']);
         return response()->json($articles);
     }
 
@@ -57,7 +57,7 @@ class ArticleController extends Controller
      * @param ArticleCreateRequest $request
      * @return ArticleResource | JsonResponse
      */
-    public function store(ArticleCreateRequest $request): ArticleResource | JsonResponse
+    public function store(ArticleCreateRequest $request): ArticleResource|JsonResponse
     {
         try {
             $data = $request->validated();
