@@ -34,9 +34,11 @@ class ArticleRepository implements ArticleRepositoryInterface
         return $this->article->where('id', '!=', $id)->inRandomOrder()->limit(3)->get();
     }
 
+
     /**
      * @param int $page
      * @param array $data
+     * @param array $relations
      * @return LengthAwarePaginator
      */
     public function all(int $page, array $data, array $relations = []): LengthAwarePaginator

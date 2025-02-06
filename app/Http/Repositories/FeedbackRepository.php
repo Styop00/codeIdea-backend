@@ -15,7 +15,9 @@ class FeedbackRepository implements FeedbackRepositoryInterface
     {
     }
 
+
     /**
+     * @param array $relations
      * @return Collection
      */
     public function all(array $relations = []): Collection
@@ -51,6 +53,10 @@ class FeedbackRepository implements FeedbackRepositoryInterface
         return $this->feedback->where('id', $id)->update($data);
     }
 
+    /**
+     * @param int $id
+     * @return bool
+     */
     public function delete(int $id): bool
     {
         return $this->feedback->destroy($id);

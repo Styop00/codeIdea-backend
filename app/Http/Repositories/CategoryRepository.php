@@ -24,7 +24,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         return $this->category->where('id', $id)->first();
     }
 
+
     /**
+     * @param array $relations
      * @return Collection
      */
     public function all(array $relations = []): Collection

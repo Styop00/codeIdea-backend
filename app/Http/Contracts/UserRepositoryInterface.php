@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface UserRepositoryInterface
 {
-    public function all($relations = []): Collection;
+    public function all(array $relations = []): Collection;
 
     public function find(int $id): User|null;
 
