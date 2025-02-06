@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             [
                 'firstname'   => 'Gevorg',
                 'lastname'    => 'lastname1',
-                'picture'     => '<img src="' . config('app.url') . '/storage/pic1.png">',
+                'picture'     => asset('storage/pic1.png'),
                 'position'    => 'ceo',
                 'description' => 'description1',
                 'created_at'  => now(),
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             [
                 'firstname'   => 'Sergey',
                 'lastname'    => 'lastname2',
-                'picture'     => '<img src="' . config('app.url') . '/storage/pic2.png">',
+                'picture'     => asset('storage/pic2.png'),
                 'position'    => 'ceo',
                 'description' => 'description2',
                 'created_at'  => now(),

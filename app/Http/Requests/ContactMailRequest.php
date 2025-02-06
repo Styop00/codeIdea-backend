@@ -46,6 +46,10 @@ class ContactMailRequest extends FormRequest
 
     }
 
+    /**
+     * @param Validator $validator
+     * @throws HttpResponseException
+     */
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

@@ -6,13 +6,11 @@ use App\Http\Contracts\ArticleRepositoryInterface;
 use App\Http\Requests\ArticleCreateRequest;
 use App\Http\Requests\ArticleUpdateRequest;
 use App\Http\Requests\PaginationRequest;
-use App\Models\Article;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\ArticleResource;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ArticleController extends Controller
 {
