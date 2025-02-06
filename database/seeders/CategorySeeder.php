@@ -13,7 +13,7 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('categories')->insert(
+        DB::table('categories')->insert([
             [
                 "category_name" => "Business",
                 'created_at'    => now(),
@@ -54,7 +54,7 @@ class CategorySeeder extends Seeder
                 'created_at'    => now(),
                 'updated_at'    => now(),
             ],
-        );
+        ]);
 
     }
 }
