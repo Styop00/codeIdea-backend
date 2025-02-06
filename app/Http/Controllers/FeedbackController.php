@@ -24,7 +24,7 @@ class FeedbackController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        $feedbacks = $this->feedbackRepository->all();
+        $feedbacks = $this->feedbackRepository->all(['user']);
         return FeedbackResource::collection($feedbacks);
     }
 

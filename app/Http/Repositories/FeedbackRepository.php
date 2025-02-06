@@ -18,9 +18,9 @@ class FeedbackRepository implements FeedbackRepositoryInterface
     /**
      * @return Collection
      */
-    public function all(): Collection
+    public function all(array $relations=[]): Collection
     {
-        return $this->feedback->with('user')->get();
+        return $this->feedback->with($relations)->get();
     }
 
     /**

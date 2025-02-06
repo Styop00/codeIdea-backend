@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface FeedbackRepositoryInterface
 {
-    public function all(): Collection;
+    public function all(array $relations=[]): Collection;
 
     public function find(int $id): Feedback|null;
 
