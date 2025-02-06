@@ -34,21 +34,23 @@ class ArticleRepository implements ArticleRepositoryInterface
         return $this->article->where('id', '!=', $id)->inRandomOrder()->limit(3)->get();
     }
 
+
     /**
      * @param int $page
      * @param array $data
+     * @param array $relations
      * @return LengthAwarePaginator
      */
-    public function all(int $page, array $data): LengthAwarePaginator
+    public function all(int $page, array $data, array $relations = []): LengthAwarePaginator
     {
         if (isset($data['category_id'])) {
             $category_id = $data['category_id'];
 
-            return $this->article->withWhereHas('categories', function ($query) use ($category_id) {
+            return $this->article->withWhereHas($relations, function ($query) use ($category_id) {
                 $query->where('category_id', '=', $category_id);
             })->paginate(10);
         } elseif (isset($data['other'])) {
-            return $this->article->whereDoesntHave('categories')->paginate(10);
+            return $this->article->whereDoesntHave($relations)->paginate(10);
         } else {
             return $this->article->paginate(10);
         }

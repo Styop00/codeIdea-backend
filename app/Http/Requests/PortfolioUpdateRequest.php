@@ -47,7 +47,7 @@ class PortfolioUpdateRequest extends FormRequest
 
     /**
      * @param Validator $validator
-     * @throws HttpClientException
+     * @throws HttpResponseException
      */
     public function failedValidation(Validator $validator)
     {

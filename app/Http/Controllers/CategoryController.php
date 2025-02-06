@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Contracts\CategoryRepositoryInterface;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
-use App\Models\Category;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\CategoryResource;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CategoryController extends Controller
 {
@@ -29,7 +25,7 @@ class CategoryController extends Controller
      */
     public function index(): JsonResponse
     {
-        $categories = $this->categoryRepository->all();
+        $categories = $this->categoryRepository->all(['articles']);
         return response()->json($categories);
     }
 

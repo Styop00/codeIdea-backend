@@ -45,6 +45,7 @@ class UserUpdateRequest extends FormRequest
 
     /**
      * @param Validator $validator
+     * @throws HttpResponseException
      */
     public function failedValidation(Validator $validator)
     {

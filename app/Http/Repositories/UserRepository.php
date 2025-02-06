@@ -24,12 +24,14 @@ class UserRepository implements UserRepositoryInterface
         return $this->user->where('id', $id)->first();
     }
 
+
     /**
+     * @param array $relations
      * @return Collection
      */
-    public function all(): Collection
+    public function all(array $relations = []): Collection
     {
-        return $this->user->all();
+        return $this->user->with($relations)->get();
     }
 
     /**

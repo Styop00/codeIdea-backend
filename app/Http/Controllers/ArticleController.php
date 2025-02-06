@@ -6,13 +6,11 @@ use App\Http\Contracts\ArticleRepositoryInterface;
 use App\Http\Requests\ArticleCreateRequest;
 use App\Http\Requests\ArticleUpdateRequest;
 use App\Http\Requests\PaginationRequest;
-use App\Models\Article;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\ArticleResource;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ArticleController extends Controller
 {
@@ -30,7 +28,7 @@ class ArticleController extends Controller
     public function index(PaginationRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $articles = $this->articleRepository->all($data['page'], $data);
+        $articles = $this->articleRepository->all($data['page'], $data, ['categories']);
         return response()->json($articles);
     }
 
@@ -59,7 +57,7 @@ class ArticleController extends Controller
      * @param ArticleCreateRequest $request
      * @return ArticleResource | JsonResponse
      */
-    public function store(ArticleCreateRequest $request): ArticleResource | JsonResponse
+    public function store(ArticleCreateRequest $request): ArticleResource|JsonResponse
     {
         try {
             $data = $request->validated();

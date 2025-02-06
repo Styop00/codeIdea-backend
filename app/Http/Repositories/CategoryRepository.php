@@ -24,12 +24,14 @@ class CategoryRepository implements CategoryRepositoryInterface
         return $this->category->where('id', $id)->first();
     }
 
+
     /**
+     * @param array $relations
      * @return Collection
      */
-    public function all(): Collection
+    public function all(array $relations = []): Collection
     {
-        return Category::with('articles')->get();
+        return Category::with($relations)->get();
     }
 
     /**

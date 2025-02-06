@@ -40,9 +40,9 @@ class CategoryUpdateRequest extends FormRequest
 
     /**
      * @param Validator $validator
-     * @return string
+     * @throws HttpResponseException
      */
-    public function failedValidation(Validator $validator): string
+    public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
             'message' => $validator->messages()->first(),

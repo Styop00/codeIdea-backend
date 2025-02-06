@@ -2,16 +2,16 @@
 
 namespace App\Http\Contracts;
 
-use App\Models\Category;
+use App\Models\Feedback;
 use Illuminate\Database\Eloquent\Collection;
 
-interface CategoryRepositoryInterface
+interface FeedbackRepositoryInterface
 {
     public function all(array $relations = []): Collection;
 
-    public function find(int $id): Category|null;
+    public function find(int $id): Feedback|null;
 
-    public function create(array $data): Category;
+    public function create(array $data): Feedback;
 
     public function update(array $data, int $id): bool;
 

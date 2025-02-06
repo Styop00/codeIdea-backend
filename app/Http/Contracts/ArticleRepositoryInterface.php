@@ -8,7 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface ArticleRepositoryInterface
 {
-    public function all(int $page, array $data): LengthAwarePaginator;
+    public function all(int $page, array $data, array $relations = []): LengthAwarePaginator;
 
     public function find(int $id): Article|null;
 

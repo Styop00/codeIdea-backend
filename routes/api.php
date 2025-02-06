@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PortfolioController;
@@ -14,7 +15,8 @@ Route::resources([
     'categories' => CategoryController::class,
     'users'      => UserController::class,
     'portfolio'  => PortfolioController::class,
-    "jobs"       => JobController::class
+    "jobs"       => JobController::class,
+    "feedbacks"  => FeedbackController::class,
 ]);
 Route::post("/mail", ContactController::class);
 Route::post('jobs/apply/{id}', [JobController::class, "apply"]);
